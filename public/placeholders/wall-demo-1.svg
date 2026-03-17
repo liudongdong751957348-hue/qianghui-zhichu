@@ -1,0 +1,13 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="900" fill="#E8DCC9"/>
+  <rect x="98" y="120" width="1404" height="640" rx="28" fill="#F7F0E4"/>
+  <rect x="160" y="182" width="1280" height="516" rx="20" fill="#D6C2A8"/>
+  <path d="M260 560C390 430 530 376 700 376C844 376 980 416 1132 520C1211 574 1300 608 1370 620V698H230V618C236 614 247 604 260 560Z" fill="#6B8D72"/>
+  <path d="M258 560C318 528 382 470 464 430C562 382 652 360 738 360C838 360 944 390 1048 444C1130 486 1224 546 1370 604V662H258V560Z" fill="#89A17B"/>
+  <circle cx="468" cy="350" r="84" fill="#D58852"/>
+  <circle cx="468" cy="350" r="40" fill="#F3D8B7"/>
+  <path d="M802 254C904 190 1024 176 1184 216V286C1010 252 902 264 802 338V254Z" fill="#A65F3A"/>
+  <path d="M740 272C786 238 840 210 920 190V268C856 288 804 314 740 362V272Z" fill="#D19769"/>
+  <rect x="0" y="760" width="1600" height="140" fill="#B48A68"/>
+  <text x="190" y="262" fill="#5F3F25" font-family="Arial, sans-serif" font-size="36">墙绘直出 Mock 场景底图</text>
+</svg>
