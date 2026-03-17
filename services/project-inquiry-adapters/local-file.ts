@@ -43,6 +43,8 @@ function sortRecords(records: ProjectInquiryRecord[]) {
 }
 
 export const localFileProjectInquiryAdapter: ProjectInquiryStorageAdapter = {
+  mode: "local-file",
+  storageAvailable: true,
   async save(request: ProjectInquirySubmitRequest) {
     const record: ProjectInquiryRecord = {
       ...request.input,

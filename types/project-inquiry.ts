@@ -29,6 +29,7 @@ export type DeliveryTypeOption =
 
 export type InquirySource = "home" | "case-study" | "proposal-export" | "direct";
 export type ProjectInquiryStatus = "new" | "contacted" | "in_progress" | "completed";
+export type ProjectInquiryStorageMode = "local-file" | "volatile";
 
 export type ProjectInquiryFormValues = {
   contactName: string;
@@ -49,7 +50,7 @@ export type ProjectInquiryRecord = ProjectInquiryFormValues & {
   updatedAt?: string;
   status: ProjectInquiryStatus;
   delivery: {
-    storageSaved: true;
+    storageSaved: boolean;
     notifications: ProjectInquiryNotificationResult[];
   };
 };
@@ -89,6 +90,11 @@ export type ProjectInquiryListResponse =
   | {
       ok: true;
       data: ProjectInquiryRecord[];
+      meta: {
+        storageMode: ProjectInquiryStorageMode;
+        storageAvailable: boolean;
+        message?: string;
+      };
     }
   | ProjectInquiryFailure;
 

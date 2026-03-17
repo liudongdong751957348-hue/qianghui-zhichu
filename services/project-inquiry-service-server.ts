@@ -40,7 +40,7 @@ export async function submitProjectInquiry(request: ProjectInquirySubmitRequest)
   const record = (await storageAdapter.updateDelivery(savedRecord.id, notifications)) || {
     ...savedRecord,
     delivery: {
-      storageSaved: true,
+      storageSaved: storageAdapter.storageAvailable,
       notifications,
     },
   };
@@ -54,7 +54,7 @@ export async function submitProjectInquiry(request: ProjectInquirySubmitRequest)
       "当前演示版默认以你提交时留下的联系方式为主，建议保留回执编号便于后续继续对接。",
     ],
     delivery: {
-      storageSaved: true,
+      storageSaved: record.delivery.storageSaved,
       notifications: record.delivery.notifications,
     },
   };
@@ -67,6 +67,11 @@ export async function listProjectInquiries(): Promise<ProjectInquiryListResponse
   return {
     ok: true,
     data: records,
+    meta: {
+      storageMode: storageAdapter.mode,
+      storageAvailable: storageAdapter.storageAvailable,
+      message: storageAdapter.message,
+    },
   };
 }
 
@@ -81,8 +86,10 @@ export async function updateProjectInquiryStatus(
     return {
       ok: false,
       error: {
-        code: "NOT_FOUND",
-        message: "未找到对应线索，无法更新状态。",
+        code: storageAdapter.storageAvailable ? "NOT_FOUND" : "STORAGE_UNAVAILABLE",
+        message: storageAdapter.storageAvailable
+          ? "未找到对应线索，无法更新状态。"
+          : storageAdapter.message || "当前环境未启用持久化存储，无法在线更新线索状态。",
       },
     };
   }

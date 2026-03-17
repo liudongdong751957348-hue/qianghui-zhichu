@@ -210,7 +210,7 @@ export function ProjectSubmitView({ sourceParam }: { sourceParam?: string }) {
           </div>
           <div className="submit-project-success__delivery">
             <div className="tag-row">
-              <span>本地保存：{response.delivery.storageSaved ? "已完成" : "未完成"}</span>
+              <span>本地保存：{response.delivery.storageSaved ? "已完成" : "未启用持久化"}</span>
               {response.delivery.notifications.map((item) => (
                 <span key={item.channel}>{notificationLabels[item.channel]}：{item.ok ? "已发送" : "未发送"}</span>
               ))}
@@ -219,7 +219,12 @@ export function ProjectSubmitView({ sourceParam }: { sourceParam?: string }) {
               {response.delivery.notifications.map((item) => (
                 <p key={`${item.channel}-${item.message}`}>{item.message}</p>
               ))}
-              <p>当前状态：项目资料已经进入系统留档，正在安排后续跟进，不会因为邮件发送状态影响你的提交结果。</p>
+              <p>
+                当前状态：
+                {response.delivery.storageSaved
+                  ? "项目资料已经进入系统留档，正在安排后续跟进，不会因为通知状态影响你的提交结果。"
+                  : "当前部署环境未启用持久化存储，但本次提交已生成正式回执并已尝试发送通知，不会影响用户收到提交结果。"}
+              </p>
             </div>
           </div>
           <div className="button-row">

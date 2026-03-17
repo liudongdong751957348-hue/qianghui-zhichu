@@ -31,6 +31,7 @@ export function InquiryWorkbench() {
   const [loading, setLoading] = useState(true);
   const [savingStatus, setSavingStatus] = useState(false);
   const [error, setError] = useState("");
+  const [infoMessage, setInfoMessage] = useState("");
   const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export function InquiryWorkbench() {
         return;
       }
 
+      setInfoMessage(response.meta.message || "");
       setRecords(response.data);
       setSelectedId(response.data[0]?.id || "");
       setLoading(false);
@@ -154,6 +156,7 @@ export function InquiryWorkbench() {
       </section>
 
       {error ? <p className="status-message status-message--error">{error}</p> : null}
+      {infoMessage ? <p className="status-message">{infoMessage}</p> : null}
 
       <div className="inquiry-layout">
         <section className="surface-card inquiry-list-card">
@@ -166,8 +169,8 @@ export function InquiryWorkbench() {
 
           {!loading && filteredRecords.length === 0 ? (
             <div className="empty-state">
-              <h2>暂无匹配线索</h2>
-              <p>当前筛选条件下没有可显示的项目提交记录。</p>
+              <h2>{infoMessage ? "当前环境未保留线索列表" : "暂无匹配线索"}</h2>
+              <p>{infoMessage || "当前筛选条件下没有可显示的项目提交记录。"}</p>
             </div>
           ) : null}
 
